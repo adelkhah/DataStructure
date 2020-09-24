@@ -61,8 +61,9 @@ int* transfer_to_matrix(int a[][3])
 	for(int i = 1; i <= a[0][2]; i++){
 	    int row = a[i][0];
         int col = a[i][1];
-   	    int val = a[i][2];
+   		int val = a[i][2];
         ans[row][col] = val;
     }
+	
 	return ans;
 }
