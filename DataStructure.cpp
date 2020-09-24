@@ -55,11 +55,10 @@ int* transfer_to_matrix(int a[][3])
 {
 	int row = a[0][0];
 	int col = a[0][1];
-	int n = a[0][2];
 	int ans[row][col];
 	memset(ans, 0, sizeof(ans)); // initialize all elements to zero
 
-	for(int i = 1; i <= n; i++){
+	for(int i = 1; i <= a[0][2]; i++){
 	    int row = a[i][0];
         int col = a[i][1];
    	    int val = a[i][2];
