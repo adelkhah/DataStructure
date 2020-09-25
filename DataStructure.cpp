@@ -1,5 +1,16 @@
 
+// 1_st question 
+void get(int i, int j)
+{
+	int before = (i*(i+1))/2;
+	return a[before + j];
+}
 
+void get(int i, int j)
+{
+	int before = (j*(j+1))/2;
+	return a[before + i];
+}
 
 // 3_rd question
 void multiple_sparse(int a[][3], int b[][3], int c[][3])
