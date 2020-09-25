@@ -1,3 +1,5 @@
+// data structure exercise sulotion
+
 
 // 1_st question 
 void get(int i, int j)
