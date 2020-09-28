@@ -1,5 +1,5 @@
 // data structure exercise sulotion
-
+// the solution to the second exercise will be here soon !!
 
 // 1_st question 
 void get(int i, int j)
