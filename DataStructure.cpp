@@ -64,19 +64,28 @@ void multiple_sparse(int a[][3], int b[][3], int c[][3])
 
 
 // 4_th question
-int* transfer_to_matrix(int a[][3])
+void transpose(int a[][3], int ans[][3])
 {
-	int row = a[0][0];
-	int col = a[0][1];
-	int ans[row][col];
-	memset(ans, 0, sizeof(ans)); // initialize all elements to zero
-
-	for(int i = 1; i <= a[0][2]; i++){
-	    int row = a[i][0];
-        int col = a[i][1];
-   		int val = a[i][2];
-        ans[row][col] = val;
-    }
+	ans[0][2] = a[0][2]; 
+	ans[0][0] = a[0][1];
+	ans[0][1] = a[0][0];
 	
+	for(int i = 1; i <= a[0][2]; i++){
+		int cnt = 0;
+		for(int j = 1; j <= a[0][2]; j++){
+			if(a[j][1] < a[i][1]){
+				cnt++;
+			}
+			else if(a[j][1] == a[i][1] && a[j][0] < a[i][0]){
+				cnt++;
+			}
+			else{
+				continue;
+			}
+		}
+		ans[cnt+1][2] = a[i][2];
+		ans[cnt+1][0] = a[i][1];
+		ans[cnt+1][1] = a[i][0];
+	}
 	return ans;
 }
