@@ -1,4 +1,4 @@
-// data structure exercise sulotion
+// data structure exercise sulotion 1
 // the solution to the second exercise will be here soon !!
 
 // 1_st question 
