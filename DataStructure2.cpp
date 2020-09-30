@@ -3,9 +3,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-template<class A> ostream& operator <<(ostream& out, const vector<A> &v)
-{out << "[";for(int i = 0; i < v.size(); i++) {if(i) out << ", ";out << v[i];}return out << "]";}
-
 int to_number(string s)
 {
 	int ans = 0;
@@ -221,6 +218,7 @@ int postfix_evalation(vector<string> a)
 
 vector<string> infix_to_prefix(vector<string> a)
 {
+	
 	reverse(a.begin(), a.end());
 
 	for(int i = 0; i < a.size(); i++){
@@ -231,6 +229,7 @@ vector<string> infix_to_prefix(vector<string> a)
 			a[i] = "(";
 		}
 	}
+	
 	
 	vector<string> prefix = infix_to_postfix(a);
 	reverse(prefix.begin(), prefix.end());
@@ -244,7 +243,7 @@ int main()
 	
 	string a = "a^b*c*d-((e+f/g)-h)";
 	//a = "a+b*c+d";
-	a = "(A-B/C)*(A/K-L)";
+	//a = "(A-B/C)*(A/K-L)";
 	//*-A/BC-/AKL
 	vector<string> ans = infix_to_prefix(seperating(a));
 	for(int i = 0; i < ans.size(); i++){
