@@ -3,7 +3,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+template<class A> ostream& operator <<(ostream& out, const vector<A> &v)
+{out << "[";for(int i = 0; i < v.size(); i++) {if(i) out << ", ";out << v[i];}return out << "]";}
 
+int to_number(string s)
+{
+	int ans = 0;
+	for(int i = s.size()-1; i >= 0; i--){
+		int tmp = s[i] - '0';
+		ans *= 10;
+		ans += tmp;
+	}
+	return ans;
+}
 bool is_operator(string s)
 {
 	if(s == "*" || s == "+" || s == "/" || s == "^" || s == "-"){
@@ -11,9 +23,53 @@ bool is_operator(string s)
 	}
 	return false;
 }
-
-bool check_valid(string a[], int n)
+bool is_operator(char s)
 {
+	if(s == '*' || s == '+' || s == '/' || s == '^' || s == '-'){
+		return true;
+	}
+	return false;
+}
+
+vector<string> clean(vector<string> v)
+{
+
+	vector<string> ans;
+	for(int i = 0; i < v.size(); i++){
+		if(v[i] != ""){
+			ans.push_back(v[i]);
+		}
+	}
+	return ans;
+}
+vector<string> seperating(string s)
+{
+	int n = s.size();
+	vector<string> ans;
+	int id = 0;
+	string tmp;
+	for(int i = 0; i < s.size(); i++){
+		if(is_operator(s[i]) || s[i] == '(' || s[i] == ')'){
+			ans.push_back(tmp);
+			id++;
+			tmp = "";
+			tmp += s[i];
+			ans.push_back(tmp);
+			tmp = "";
+		}
+		else{
+			tmp += s[i];
+		}
+	}
+	ans.push_back(tmp);
+	ans = clean(ans);
+	return ans;
+
+}
+
+bool check_valid(vector<string> a)
+{
+	int n = a.size();
 	int cnt = 0;
 	if(is_operator(a[0]) || is_operator(a[n-1])){
 		return false;
@@ -41,11 +97,15 @@ bool check_valid(string a[], int n)
 
 }
 
-void infix_to_postfix(string a[], int n, string postfix[])
+vector<string> infix_to_postfix(vector<string> a)
 {
-	if(!check_valid(a, n)){
-		return;
+	int n = a.size();
+	vector<string> postfix(n);
+
+	if(!check_valid(a)){
+		return postfix;
 	}
+
 	int id = 0; // for postfix
 	stack<string> stk;
 
@@ -106,30 +166,91 @@ void infix_to_postfix(string a[], int n, string postfix[])
 		id++;
 		stk.pop();
 	}
+	return postfix;
 }
 
 
 
-int postfix_ecalation(string postfix[], int n)
+int postfix_evalation(vector<string> a)
 {
-	return 0;
+	stack<int> stk;
+	for(int i = 0; i < a.size(); i++){
+		if(a[i] == "+"){
+			int a = stk.top();
+			stk.pop();
+			int b = stk.top();
+			stk.pop();
+			stk.push(b+a);
+		}
+		else if(a[i] == "-"){
+			int a = stk.top();
+			stk.pop();
+			int b = stk.top();
+			stk.pop();
+			stk.push(b-a);
+		}
+		else if(a[i] == "*"){
+			int a = stk.top();
+			stk.pop();
+			int b = stk.top();
+			stk.pop();
+			stk.push(b*a);
+		}
+		else if(a[i] == "/"){
+			int a = stk.top();
+			stk.pop();
+			int b = stk.top();
+			stk.pop();
+			stk.push(b/a);
+		}
+		else if(a[i] == "^"){
+			int a = stk.top();
+			stk.pop();
+			int b = stk.top();
+			stk.pop();
+			int tmp = pow(b,a);
+			stk.push(tmp);
+		}
+		else{
+			stk.push(to_number(a[i]));
+		}
+
+	}
+	return stk.top();
 }
 
-void infix_to_prefix(string infix[], int n, string prefix)
+vector<string> infix_to_prefix(vector<string> a)
 {
+	reverse(a.begin(), a.end());
 
+	for(int i = 0; i < a.size(); i++){
+		if(a[i] == "("){
+			a[i] = ")";
+		}
+		else if(a[i] == ")"){
+			a[i] = "(";
+		}
+	}
+	
+	vector<string> prefix = infix_to_postfix(a);
+	reverse(prefix.begin(), prefix.end());
+	return prefix;
 }
 
 
 int main()
 {
+
 	
-	string a[] = {"a","^","b","*","c","*","d","-","(","(","e","+","f","/","g",")","-","h",")"};
-	int n = 19;
-	string ans[n];
-	infix_to_postfix(a, n, ans);
-	for(int i = 0; i < n; i++){
+	string a = "a^b*c*d-((e+f/g)-h)";
+	//a = "a+b*c+d";
+	a = "(A-B/C)*(A/K-L)";
+	//*-A/BC-/AKL
+	vector<string> ans = infix_to_prefix(seperating(a));
+	for(int i = 0; i < ans.size(); i++){
 		cout << ans[i];
 	}
+	cout << endl;
+	//ab^c*d*efg/+h--
 	return 0;
 }
