@@ -245,9 +245,16 @@ int main()
 	//a = "a+b*c+d";
 	//a = "(A-B/C)*(A/K-L)";
 	//*-A/BC-/AKL
-	vector<string> ans = infix_to_prefix(seperating(a));
-	for(int i = 0; i < ans.size(); i++){
-		cout << ans[i];
+	vector<string> prefix = infix_to_prefix(seperating(a));
+	vector<string> postfix = infix_to_postfix(seperating(a));
+	
+	cout << "prefix : ";
+	for(int i = 0; i < prefix.size(); i++){
+		cout << prefix[i];
+	}
+	cout << endl << "postfix : ";
+	for(int i = 0; i < postfix.size(); i++){
+		cout << postfix[i];
 	}
 	cout << endl;
 	//ab^c*d*efg/+h--
