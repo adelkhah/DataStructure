@@ -3,7 +3,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int to_number(string s)
+int to_number(string s) // convert "123" to 123
 {
 	int ans = 0;
 	for(int i = s.size()-1; i >= 0; i--){
@@ -28,7 +28,7 @@ bool is_operator(char s)
 	return false;
 }
 
-vector<string> clean(vector<string> v)
+vector<string> clean(vector<string> v) // cleaning form empty element
 {
 
 	vector<string> ans;
@@ -39,6 +39,7 @@ vector<string> clean(vector<string> v)
 	}
 	return ans;
 }
+
 vector<string> seperating(string s)
 {
 	int n = s.size();
@@ -68,14 +69,16 @@ bool check_valid(vector<string> a)
 {
 	int n = a.size();
 	int cnt = 0;
-	if(is_operator(a[0]) || is_operator(a[n-1])){
+	if(is_operator(a[0]) || is_operator(a[n-1])){ // +4*3- is invalid
 		return false;
 	}
-	for(int i = 1; i < n; i++){
+	for(int i = 1; i < n; i++){ // 3++4 is invalid
 		if(is_operator(a[i-1]) && is_operator(a[i])){
 			return false;
 		}
 	}
+
+	// this part is checking valid paranteses
 	for(int i = 0; i < n; i++){
 		if(a[i] == "("){
 			cnt++;
@@ -90,6 +93,7 @@ bool check_valid(vector<string> a)
 	if(cnt != 0){
 		return false;
 	}
+
 	return true;
 
 }
@@ -97,9 +101,10 @@ bool check_valid(vector<string> a)
 vector<string> infix_to_postfix(vector<string> a)
 {
 	int n = a.size();
-	vector<string> postfix(n);
+	vector<string> postfix(n); // creating a vector of string with size n
 
 	if(!check_valid(a)){
+		cout << "invalid" << endl;
 		return postfix;
 	}
 
@@ -124,7 +129,7 @@ vector<string> infix_to_postfix(vector<string> a)
 				id++;
 				stk.pop();
 			}
-			stk.push(a[i]);
+			stk.push(a[i]); // pushing "+"
 		}
 		else if(a[i] == "-"){
 			while(!stk.empty() && stk.top() != "("){
@@ -132,7 +137,7 @@ vector<string> infix_to_postfix(vector<string> a)
 				id++;
 				stk.pop();
 			}
-			stk.push(a[i]);
+			stk.push(a[i]); // pushing "-"
 		}
 		else if(a[i] == "*"){
 			while(!stk.empty() && stk.top() != "(" && stk.top() != "+" && stk.top() != "-"){
@@ -140,7 +145,7 @@ vector<string> infix_to_postfix(vector<string> a)
 				id++;
 				stk.pop();
 			}
-			stk.push(a[i]);
+			stk.push(a[i]); // pushing "*"
 		}
 		else if(a[i] == "/"){
 			while(!stk.empty() && stk.top() != "(" && stk.top() != "+" && stk.top() != "-"){
@@ -148,9 +153,9 @@ vector<string> infix_to_postfix(vector<string> a)
 				id++;
 				stk.pop();
 			}
-			stk.push(a[i]);
+			stk.push(a[i]); // pushing "/"
 		}
-		else if(a[i] == "^"){
+		else if(a[i] == "^"){ // there is no operator with priority more than ^ in the string
 			stk.push(a[i]);
 		}
 		else{ // a[i] is a number or variable
@@ -244,7 +249,8 @@ int main()
 	string a = "a^b*c*d-((e+f/g)-h)";
 	//a = "a+b*c+d";
 	//a = "(A-B/C)*(A/K-L)";
-	//*-A/BC-/AKL
+	//prefix : *-A/BC-/AKL
+	//postfix : ab^c*d*efg/+h--
 	vector<string> prefix = infix_to_prefix(seperating(a));
 	vector<string> postfix = infix_to_postfix(seperating(a));
 	
@@ -257,6 +263,5 @@ int main()
 		cout << postfix[i];
 	}
 	cout << endl;
-	//ab^c*d*efg/+h--
 	return 0;
 }
