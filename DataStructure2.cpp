@@ -40,7 +40,7 @@ vector<string> clean(vector<string> v) // cleaning form empty element
 	return ans;
 }
 
-vector<string> seperating(string s)
+vector<string> seperating(string s) // convert "12*23+5" to ["12", "*", "23", "+", "5"]
 {
 	int n = s.size();
 	vector<string> ans;
