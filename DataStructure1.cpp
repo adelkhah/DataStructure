@@ -1,20 +1,26 @@
 // data structure exercise sulotion 1
-// the solution to the second exercise will be here soon !!
+
 
 // 1_st question 
-void get(int i, int j)
+void get_lower_triangle(int i, int j)
 {
+	// from row 0 to n from column 0 to m collect none zero element 
 	int before = (i*(i+1))/2;
 	return a[before + j];
 }
 
-void get(int i, int j)
+//2_nd question
+void get_upper_triangle(int i, int j)
 {
+	// from column 0 to m from row 0 to n collect none zero element
 	int before = (j*(j+1))/2;
 	return a[before + i];
 }
 
+
 // 3_rd question
+// main idea: the product of two arbitrary element like a[i][k] and b[k][j]
+// will be added to the ans[i][j] where ans = a*b
 void multiple_sparse(int a[][3], int b[][3], int c[][3])
 {
 	if(a[0][1] != b[0][0]){ // cant multiple these matrix
@@ -64,6 +70,8 @@ void multiple_sparse(int a[][3], int b[][3], int c[][3])
 
 
 // 4_th question
+// main idea : count the number of elements before the current element in transpose
+// and store it in "cnt" then that element is in transpose[cnt]
 void transpose(int a[][3], int ans[][3])
 {
 	ans[0][2] = a[0][2]; 
@@ -89,3 +97,5 @@ void transpose(int a[][3], int ans[][3])
 	}
 	return ans;
 }
+
+// written by Ali Adelkhah

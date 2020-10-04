@@ -265,3 +265,5 @@ int main()
 	cout << endl;
 	return 0;
 }
+
+// written by Ali Adelkhah
