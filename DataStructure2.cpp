@@ -98,6 +98,9 @@ bool check_valid(vector<string> a)
 
 }
 
+
+
+// question 1
 vector<string> infix_to_postfix(vector<string> a)
 {
 	int n = a.size();
@@ -172,7 +175,7 @@ vector<string> infix_to_postfix(vector<string> a)
 }
 
 
-
+// question 1
 int postfix_evalation(vector<string> a)
 {
 	stack<int> stk;
@@ -221,6 +224,8 @@ int postfix_evalation(vector<string> a)
 	return stk.top();
 }
 
+
+// question 2
 vector<string> infix_to_prefix(vector<string> a)
 {
 	
@@ -241,29 +246,60 @@ vector<string> infix_to_prefix(vector<string> a)
 	return prefix;
 }
 
+void solve_2stack_problem(stack<int> s1, stack<int> s2);
 
 int main()
 {
 
 	
-	string a = "a^b*c*d-((e+f/g)-h)";
-	//a = "a+b*c+d";
-	//a = "(A-B/C)*(A/K-L)";
-	//prefix : *-A/BC-/AKL
-	//postfix : ab^c*d*efg/+h--
+	string a = "A*(B^C)+(D/E)";
 	vector<string> prefix = infix_to_prefix(seperating(a));
-	vector<string> postfix = infix_to_postfix(seperating(a));
-	
-	cout << "prefix : ";
+	cout << "after reversing -> prefix : ";
 	for(int i = 0; i < prefix.size(); i++){
-		cout << prefix[i];
+		cout << prefix[i] << " ";
 	}
+	vector<string> postfix = infix_to_postfix(seperating(a));
 	cout << endl << "postfix : ";
 	for(int i = 0; i < postfix.size(); i++){
-		cout << postfix[i];
+		cout << postfix[i] << " ";
 	}
 	cout << endl;
 	return 0;
 }
 
 // written by Ali Adelkhah
+
+
+
+
+void solve_2stack_problem(stack<int> s1, stack<int> s2) // 1 ... n are in the s1
+{
+
+	int number_to_remove = 1; // the number we want to print and then remove
+	while(!s1.empty() || !s2.empty()){
+		if(number_to_remove % 2 == 1){ // then we want to remove from the begin
+			while(!s1.empty()){ // move all elements from s1 to s2
+				s2.push(s1.top());
+				s1.pop();
+			}
+			for(int i = 0; i < min(number_to_remove,(int)s2.size()); i++){ // remove elements
+				cout << s2.top() << endl;
+				s2.pop();
+			}
+			number_to_remove++;
+		}
+
+		else{ // then we want to remove from the end
+			while(!s2.empty()){ // move all elements from s2 to s1
+				s1.push(s2.top());
+				s2.pop();
+			}
+			for(int i = 0; i < min(number_to_remove,(int)s1.size()); i++){ // remove elements
+				cout << s1.top() << endl;
+				s1.pop();
+			}
+			number_to_remove++;
+		}
+	}
+	
+}
