@@ -20,13 +20,13 @@ private:
 		return index;
 	}
 public:
-	void addPQ(int x){
+	void insert(int x){
 		a[size] = x;
 		size++;
 	}
-	void deletePQ(){
+	void remove(){
 		int index = find_highest_priority();
-		for(int i = index; i < size; i++){
+		for(int i = index; i < size; i++){ // shift [index,size) to left
 			a[i] = a[i+1];
 		}
 		size--;
@@ -41,8 +41,29 @@ public:
 
 };
 
+class Deque // implementing input-restricted which insertion is one sided
+{
+	int size = 0;
+	int a[MAX_SIZE];
+public:
+	void remove_back(){
+		size--;
+	}
+	void remove_front(){
+		for(int i = 0; i < size; i++){ // shift [1,size) to left
+			a[i] = a[i+1];
+		}
+		size--;
+	}
+	void insert(int x){
+		a[size] = x;
+		size++;
+	}
+	
+};
+
 int main()
 {
-	// code
+	// no need to test :)
 	return 0;
 }
