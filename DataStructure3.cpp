@@ -59,6 +59,12 @@ public:
 		a[size] = x;
 		size++;
 	}
+	bool empty(){
+		if(size == 0){
+			return true;
+		}
+		return false;
+	}
 	
 };
 
