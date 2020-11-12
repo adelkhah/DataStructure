@@ -43,9 +43,9 @@ int main()
 	ListNode *a6 = new ListNode(5, a7);
 	ListNode *a5 = new ListNode(4, a6);
 	ListNode *a4 = new ListNode(3, a5);
-	ListNode *a3 = new ListNode(2, a4);
-	ListNode *a2 = new ListNode(1, a3);
-	ListNode *a1 = new ListNode(0, a2);
+	ListNode *a3 = new ListNode(5, a4);
+	ListNode *a2 = new ListNode(3, a3);
+	ListNode *a1 = new ListNode(2, a2);
 	show(a1);
 	ListNode *ans = solve_probelm_3(a1);
 	show(ans);
