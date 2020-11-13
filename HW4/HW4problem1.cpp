@@ -1,7 +1,6 @@
 // Ali Adelkhah
 // 9812762372
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
