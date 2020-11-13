@@ -26,6 +26,7 @@ void show(ListNode *node) // showing the linked list
 ListNode* solve_probelm_4(ListNode *first)
 {
 	// time complexity of this algorithm is also O(size^2)
+	
 	ListNode *cur = first;
 	ListNode *pre = nullptr;
 	ListNode *lo = nullptr; // pointer to the last odd element

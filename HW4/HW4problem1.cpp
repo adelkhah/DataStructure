@@ -33,7 +33,7 @@ ListNode* solve_probelm_1(ListNode *first, int V)
 	ListNode *cur = first -> next;
 	while(cur != nullptr){
 		if(cur -> val == V){ // delete "cur" and don't change "pre" 
-			//	pre cur   cur->next
+			//  pre cur   cur->next
 			//   a   V       b
 			pre -> next = cur -> next; 
 			cur = cur -> next;

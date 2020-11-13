@@ -39,6 +39,7 @@ ListNode* reverse_linklist(ListNode *first) // from problem 2
 
 ListNode* solve_probelm_5(ListNode *a, ListNode *b)
 {
+	// time complexity of this algorithm is O(size(a) + size(b))
 	show(a);
 	show(b);
 	ListNode *ar = reverse_linklist(a);

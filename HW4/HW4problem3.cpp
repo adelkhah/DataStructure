@@ -27,7 +27,7 @@ ListNode* solve_probelm_3(ListNode *first)
 {
 	ListNode *cur = first -> next;
 	ListNode *pre = first;
-	pre -> next = nullptr; // first->next don't change in while loop
+	pre -> next = nullptr; // first->next doesn't change in while loop
 	while(cur != nullptr){ // reverse every edge a -> b : a <- b
 		ListNode *tmp = cur; // pre -> cur
 		cur = cur->next; // pre -> tmp -> cur

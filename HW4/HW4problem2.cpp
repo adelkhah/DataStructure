@@ -33,12 +33,10 @@ bool solve_problem_2(ListNode *first)
 	ListNode *check = first;
 	int ind_node = 0;
 	int ind_check = 0;
-
 	while(node != nullptr){ // find the size of link list
 		size++;
 		node = node -> next;
 	}
-
 	node = first;
 	while(ind_node < size/2){ // we need to check first half with the second half
 		ind_check = 0;
