@@ -99,7 +99,26 @@ bool check_valid(vector<string> a)
 }
 
 
-
+void print(stack<string> s)
+{
+	vector<string> ans;
+	while(s.size()){
+		ans.push_back(s.top());
+		s.pop();
+	}
+	reverse(ans.begin(), ans.end());
+	for(int i = 0; i < ans.size(); i++){
+		cout << ans[i] << " ";
+	}
+	cout << endl;
+}
+void printv(vector<string> v)
+{
+	for(int i = 0; i < v.size(); i++){
+		cout << v[i] << " ";
+	}
+	cout << endl;
+}
 // question 1
 vector<string> infix_to_postfix(vector<string> a)
 {
@@ -165,6 +184,9 @@ vector<string> infix_to_postfix(vector<string> a)
 			postfix[id] = a[i];
 			id++;
 		}
+		print(stk);
+		printv(postfix);
+		cout << endl;
 	}
 	while(!stk.empty()){
 		postfix[id] = stk.top();
@@ -252,12 +274,8 @@ int main()
 {
 
 	
-	string a = "A*(B^C)+(D/E)";
-	vector<string> prefix = infix_to_prefix(seperating(a));
-	cout << "after reversing -> prefix : ";
-	for(int i = 0; i < prefix.size(); i++){
-		cout << prefix[i] << " ";
-	}
+	string a = "6+1-4*(3^2*(8-1)/3+4-2)*5";
+	
 	vector<string> postfix = infix_to_postfix(seperating(a));
 	cout << endl << "postfix : ";
 	for(int i = 0; i < postfix.size(); i++){
